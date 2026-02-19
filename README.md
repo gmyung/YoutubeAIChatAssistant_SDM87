@@ -72,6 +72,66 @@ Each item in `messages`:
 | `imageData` | array | *(optional)* Base64 image attachments `[{ data, mimeType }]` |
 | `toolCalls` | array | *(optional)* Client-side tool invocations `[{ name, args, result }]` |
 
+## Deploying to Render
+
+The repo includes a `render.yaml` Blueprint that configures both the backend (Web Service) and frontend (Static Site) in one file.
+
+### Step-by-step
+
+**1. Deploy the backend first**
+
+Go to [render.com](https://render.com) → New → **Web Service** → connect your GitHub repo.
+
+| Setting | Value |
+|---------|-------|
+| Environment | Node |
+| Build Command | `npm install` |
+| Start Command | `node server/index.js` |
+
+Add this environment variable in the Render dashboard:
+
+| Variable | Value |
+|----------|-------|
+| `MONGODB_URI` | Your MongoDB Atlas connection string |
+
+Once deployed, copy the backend URL (e.g. `https://chatapp-backend.onrender.com`).
+
+---
+
+**2. Deploy the frontend**
+
+New → **Static Site** → same repo.
+
+| Setting | Value |
+|---------|-------|
+| Build Command | `npm install && npm run build` |
+| Publish Directory | `build` |
+
+Add these environment variables:
+
+| Variable | Value |
+|----------|-------|
+| `REACT_APP_GEMINI_API_KEY` | Your Gemini API key |
+| `REACT_APP_API_URL` | Backend URL from step 1, e.g. `https://chatapp-backend.onrender.com` |
+
+> **Important:** `REACT_APP_*` variables are baked into the JavaScript bundle at build time. If you change them in the dashboard, you must trigger a new deploy of the static site.
+
+---
+
+**Or use the Blueprint (both services at once)**
+
+New → **Blueprint** → connect your repo. Render reads `render.yaml` and creates both services. You'll be prompted to enter the four secrets (`MONGODB_URI`, `REACT_APP_GEMINI_API_KEY`, `REACT_APP_API_URL`) after creation.
+
+> **Note:** Because `REACT_APP_API_URL` must point to the backend's URL, which is only known after the backend is deployed, you may need to set `REACT_APP_API_URL` and re-deploy the static site after the first Blueprint run.
+
+---
+
+### Free tier cold starts
+
+Render's free plan spins down services after 15 minutes of inactivity. The first request after a sleep takes ~30 seconds. Upgrade to the Starter plan ($7/mo) to avoid this.
+
+---
+
 ## Running the App
 
 ### Option 1: Both together (single terminal)
