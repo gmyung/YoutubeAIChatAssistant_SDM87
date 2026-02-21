@@ -1,0 +1,86 @@
+.generated-image-wrap {
+  margin: 0.75rem 0;
+}
+
+.generated-image-inner {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.generated-image-inner:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.generated-image-img {
+  max-width: 320px;
+  max-height: 240px;
+  width: auto;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+.generated-image-download {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  border: none;
+  cursor: pointer;
+}
+
+.generated-image-download:hover {
+  background: rgba(59, 130, 246, 0.3);
+}
+
+.generated-image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.generated-image-modal-content {
+  position: relative;
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 1rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.generated-image-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.generated-image-modal-close:hover {
+  color: #fff;
+}
+
+.generated-image-modal-img {
+  max-width: 85vw;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto 0.5rem;
+}
